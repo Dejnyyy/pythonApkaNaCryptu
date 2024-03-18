@@ -2,7 +2,7 @@
  - made by Dejny
 ## How to start
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
+Use the package manager [pip](https://pip.pypa.io/en/stable/) to install packages.
 
 ```bash
 pip install requests
