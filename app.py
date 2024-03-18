@@ -1,6 +1,9 @@
+from flask import Flask, render_template
 import os
 from dotenv import load_dotenv
 import requests
+
+app = Flask(__name__)
 
 # Load environment variables from .env file
 load_dotenv()
@@ -27,16 +30,23 @@ def get_crypto_data():
             # Parse the JSON response
             data = response.json()
             # Extracting data for the first 20 cryptocurrencies
+            crypto_data = []
             for i in range(20):
                 cryptocurrency = data['data'][i]
                 name = cryptocurrency['name']
                 symbol = cryptocurrency['symbol']
                 price = cryptocurrency['quote']['USD']['price']
-                print(f"{name} ({symbol}): ${price}")
+                crypto_data.append({'name': name, 'symbol': symbol, 'price': price})
+            return crypto_data
         else:
-            print("Error:", response.status_code)
+            return "Error: Unable to fetch data from API"
     except Exception as e:
-        print("An error occurred:", e)
+        return "An error occurred: " + str(e)
+
+@app.route('/')
+def index():
+    crypto_data = get_crypto_data()
+    return render_template('index.html', crypto_data=crypto_data)
 
 if __name__ == "__main__":
-    get_crypto_data()
+    app.run(debug=True)

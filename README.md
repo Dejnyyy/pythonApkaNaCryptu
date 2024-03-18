@@ -10,6 +10,9 @@ pip install requests
 ```bash
 pip install python-dotenv
 ```
+```bash
+pip install Flask
+```
 ## SetUp
 in the enviromental file change API_KEY to your actual API KEY
 ```bash
@@ -18,5 +21,5 @@ API_KEY = "***************"
 ```
 ## Usage
 ```bash
-python coinmarketcap.py
+python app.py
 ```
